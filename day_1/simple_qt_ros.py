@@ -72,12 +72,13 @@ class ImageSubscriber(Node):
         self.image_np = None
         self.subscription_rgb = self.create_subscription(
             CompressedImage,
-            'rgb_image/compressed_image',
+            'image_raw/compressed',
             self.listener_callback_rgb,
             10)
         self.subscription_rgb  # prevent unused variable warning
 
     def listener_callback_rgb(self, msg):
+        print('listener_callback_rgb...')
         np_arr = np.frombuffer(msg.data, np.uint8)
         self.image_np = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)  # Decode to color image
         # cv2.imshow('RGB Image', image_np)
