@@ -1,0 +1,7 @@
+names:
+        0: red
+        1: blue
+        2: purple
+test: /home/mrthink/workspace/yolo/my_data/test/
+train: /home/mrthink/workspace/yolo/my_data/train/
+val: /home/mrthink/workspace/yolo/my_data/valid/
