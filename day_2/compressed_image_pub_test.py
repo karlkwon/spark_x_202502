@@ -10,6 +10,7 @@ class ImagePublisher(Node):
         
         # 이미지 퍼블리셔 생성
         self.publisher_ = self.create_publisher(CompressedImage, 'image_raw/compressed', 10)
+        self.publisher_low_ = self.create_publisher(CompressedImage, 'image_raw/compressed_low', 10)
         
         # OpenCV와 ROS 간 변환을 위한 CvBridge 초기화
  #       self.bridge = CvBridge()
@@ -47,7 +48,13 @@ class ImagePublisher(Node):
 
             # CompressedImage 퍼블리시
             self.publisher_.publish(msg)
-            self.get_logger().info('Publishing compressed image...')
+
+            encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 10]  # 90은 압축 품질
+            _, compressed_image_low = cv2.imencode('.jpg', frame, encode_param)
+            msg.data = compressed_image_low.tobytes()  # 압축된 이미지 데이터
+            self.publisher_low_.publish(msg)
+
+            self.get_logger().info('Publishing compressed image... {%d}, {%d}' % (len(compressed_image), len(compressed_image_low)))
 
 
 def main(args=None):
