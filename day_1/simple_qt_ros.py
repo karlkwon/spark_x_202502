@@ -72,7 +72,8 @@ class ImageSubscriber(Node):
         self.image_np = None
         self.subscription_rgb = self.create_subscription(
             CompressedImage,
-            'image_raw/compressed',
+            # 'image_raw/compressed',
+            'image_raw/compressed_low',
             self.listener_callback_rgb,
             10)
         self.subscription_rgb  # prevent unused variable warning
