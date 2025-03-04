@@ -54,7 +54,8 @@ class ImagePublisher(Node):
             # msg.data = compressed_image_low.tobytes()  # 압축된 이미지 데이터
             # self.publisher_low_.publish(msg)
 
-            self.get_logger().info('Publishing compressed image... {%d}, {%d}' % (len(compressed_image), len(compressed_image_low)))
+            # self.get_logger().info('Publishing compressed image... {%d}, {%d}' % (len(compressed_image), len(compressed_image_low)))
+            self.get_logger().info('Publishing compressed image... {%d}' % (len(compressed_image),))
 
 
 def main(args=None):
